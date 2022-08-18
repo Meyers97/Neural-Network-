@@ -1,10 +1,9 @@
 import java.util.Random;
-// import java.util.List;
-// import java.util.Collections;
-// import java.util.ArrayList;
 
 public class Matrix_Arithmetic
 {
+    static Activation_Function AF = new Activation_Function();
+
     // initial weights for hidden layer neurons 
     public static double[][] Gen_Hidden_Weights(int n_neurons, boolean bias)
     {
@@ -50,7 +49,8 @@ public class Matrix_Arithmetic
 
         for(int j = 0; j < init_inputs.length; j++)
         {
-            // init_inputs[j] =  Activation_Function.Sigmoid(init_inputs[j]);
+            init_inputs[j] =  Activation_Function.Sigmoid(init_inputs[j]);
+            
         }
 
         return init_inputs; 
@@ -64,7 +64,7 @@ public class Matrix_Arithmetic
         {
             for(int k = 0; k < init_inputs[j].length; k++)
             {
-                // init_inputs[j][k] = Activatoin_Function.Sigmoid(init_inputs[j][k]);
+                init_inputs[j][k] = Activation_Function.Sigmoid(init_inputs[j][k]);
             }
         }
 
