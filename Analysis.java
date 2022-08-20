@@ -21,4 +21,8 @@ public class Analysis
         }
     } 
 
+    public static double Error(double actual_output, double target_output)
+    {
+        return (target_output - actual_output);
+    }
 }

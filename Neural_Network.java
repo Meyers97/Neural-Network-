@@ -1,16 +1,21 @@
 public class Neural_Network 
 {
     static double[][] inputs = {{0,1}, {1.1}};  
-    static double[][] weight = {{0.62, 0.42},{0.55,-0.17}};
+    static double[] outputs = {0,1};
+    static double[][] hidden_weights = {{0.62, 0.42},{0.55,-0.17}};
     static double[] output_weights = {0.35,0.81};
+    static double learning_rate = 0.25;
 
     public static void main(String[] args) throws Exception
     {        
         System.out.println("Hello World");
 
         Forward_Propagation test = new Forward_Propagation();
+        Backward_Propagation test1 = new Backward_Propagation();
 
-        test.Start(inputs[0], weight, output_weights);
+        test.Start(inputs[0], hidden_weights, output_weights);
+        test1.Start(outputs[0], test.final_output, learning_rate, inputs[0], test.hidden_output);
 
+        
     }    
 }
