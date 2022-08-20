@@ -25,4 +25,17 @@ public class Analysis
     {
         return (target_output - actual_output);
     }
+
+    public static double MSE(double[] error)
+    {
+        double result = 0; 
+
+        for(int j = 0; j < error.length; j++)
+        {
+            result += Math.pow(error[j], 2);
+        }
+        result = result/error.length;
+
+        return result;
+    }
 }
