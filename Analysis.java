@@ -1,5 +1,7 @@
 public class Analysis 
 {
+    // static boolean walk_through = false; 
+
     public static void Print_Matrix_1D(double[] matrix)
     {
         for(int j = 0; j < matrix.length; j++)
