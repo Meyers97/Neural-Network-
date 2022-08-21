@@ -9,7 +9,7 @@ public class Initialise
     int training_size = 100;
     int layers = 2; 
     double learning_rate = 0.6;
-    boolean bias = true; 
+    boolean bias = false; 
 
     public static double[] Enable_Bias(double[] input)
     {
@@ -85,4 +85,78 @@ public class Initialise
             return weight; 
         }
     
+        public static double[][] Gen_Inputs(int training_size)
+        {
+            double[][] result = new double[training_size][2];
+            Random random = new Random(); 
+            
+            for(int j = 0; j < training_size; j++)
+            {
+                for(int k = 0; k < 2; k++)
+                {
+                    result[j][k] = random.nextInt(100)/100.0;
+                }
+            }
+
+            return result;
+        }
+
+        public static double[] Gen_Outputs(double[][] inputs, int logic)
+        {
+            double[] result = new double[inputs.length];
+
+            for(int j = 0; j < inputs.length; j++)
+            {
+                int count = 0;
+                switch(logic)
+                {
+                    //AND 
+                    case 1:
+                        if(inputs[j][0] > 0.5 & inputs[j][1] > 0.5)
+                            result[j] = 1;
+                        else 
+                            result[j] = 0;
+                        break;
+
+                    //OR                            
+                    case 2:
+                        if(inputs[j][0] > 0.5 || inputs[j][1] > 0.5)
+                            result[j] = 1;
+                        else 
+                            result[j] = 0;
+                        break;
+
+                    //NOR
+                    case 3: 
+                        for(int k = 0; k < inputs[0].length; k++)
+                        {
+                            if(inputs[j][k] > 0.5)
+                                count = count + 1;
+                        }
+                            if(count == 0)
+                                result[j] = 1;
+                            else 
+                                result[j] = 0;
+                        count = 0;
+                        break;
+
+                    //XOR
+                    case 4:
+                        for(int k = 0; k < inputs[0].length; k++)
+                        {
+                            if(inputs[j][k] < 0.5)
+                                count = count + 1;
+                        }
+                        if(count == 1)
+                            result[j] = 1;
+                        else 
+                            result[j] = 0;
+                        
+                        count = 0;
+                        break;
+
+                }
+            }  
+            return result;
+        }
 }
