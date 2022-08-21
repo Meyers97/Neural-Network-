@@ -37,6 +37,13 @@ public class Matrix_Arithmetic
         for(int j = 0; j < input.length; j++)
         {
             result += input[j]*weight[j];
+            // if(Analysis.walk_through = true)
+            // {
+            //     System.out.println("Matrix Dot 1D: " + result);
+            //     Analysis.Print_Matrix_1D(input);
+            //     Analysis.Print_Matrix_1D(weight);
+            //     System.out.println();
+            // }
         }
 
         return result;
@@ -50,9 +57,18 @@ public class Matrix_Arithmetic
         {
             for(int k = 0; k < input.length; k++)
             {
-                result[j] += weights[k][j]*input[k];
+                result[j] += weights[k][j]*input[k]; 
             }
         }
+        // if(Analysis.walk_through == true)
+        //         {
+        //             // System.out.print("Matrix Dot 2D: ");
+        //             // Analysis.Print_Matrix_1D(result);
+        //             // Analysis.Print_Matrix_1D(input);
+        //             // Analysis.Print_Matrix_2D(weights);
+        //             System.out.println(Analysis.walk_through);
+        //         }
+
         return result;
     }
 
@@ -107,8 +123,8 @@ public class Matrix_Arithmetic
             for(int k = 0; k < hidden_input.length; k++)
             {
                 result[j][k] = learning_rate*error*hidden_input[k]*hidden_output[j]*(1-hidden_output[j]);
-                // System.out.println(learning_rate + "*" + error + "*" + hidden_input[j]+ "*" + hidden_output[k]);
-                //                      0.25                -0.6439         0                   0.6341
+                // if(Analysis.walk_through == true)
+                //     System.out.println(result[j][k] + " = "+learning_rate + "*" + error + "*" + hidden_input[j] + "*" + hidden_output[k] + "*" + "(1-" + hidden_output[k] + ")");
             }
         }
         return result;
@@ -121,6 +137,8 @@ public class Matrix_Arithmetic
         for(int j = 0; j < output_weights.length; j++)
         {
             result[j] = learning_rate*error*hidden_output[j]*output*(1-output);
+            // if(Analysis.walk_through == true)
+            //         System.out.println(result[j] + " = "+learning_rate + "*" + error + "*" + hidden_output[j] + "*" + output + "*" + "(1-" + output + ")");
         }
 
         return result;
