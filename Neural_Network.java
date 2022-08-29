@@ -2,21 +2,26 @@ public class Neural_Network
 {
     static double[][] inputs = {{0,1},{1,1}};  
     static double[] outputs = {0,1};
-    static double[][] hidden_weights = {{0.62, 0.42},{0.55,-0.17}};
-    static double[] output_weights = {0.35,0.81};
+    static double[][][] hidden_weights = {{{0.62,0.55}, {0.42,-0.17}, {0.53,0.21}},{{0.62,0.55,-0.8}, {0.42,-0.17,0.34}, {0.53,0.21,-0.43}},{{0.62,0.55,-0.8}, {0.42,-0.17,0.34}, {0.53,0.21,-0.43}}}; 
+    static double[] output_weights = {0.35,0.81,0.9};
     static double[] errors;
     static double learning_rate = 0.25;
-    static int max_iteration = 1000;
+    static int max_iteration = 10000;
     static int iteration = 0;
-    static int hidden_layers = 2;
+    static int hidden_layers = 3;
+    static int n_neurons = 5;
+
 
     public static void main(String[] args) throws Exception
     {        
-        Forward_Propagation[][] forward_training_set = new Forward_Propagation[max_iteration][hidden_layers];
-        Backward_Propagation[][] backward_training_set = new Backward_Propagation[max_iteration][hidden_layers];
-        
-        inputs = Initialise.Gen_Inputs(10);
+        Forward_Propagation[] forward_training_set = new Forward_Propagation[inputs.length];
+        Backward_Propagation[] backward_training_set = new Backward_Propagation[inputs.length];
+        inputs = Initialise.Gen_Inputs(2);
         outputs = Initialise.Gen_Outputs(inputs, 4);
+        for(int j = 0; j < hidden_layers; j++)
+            hidden_weights[j] = Initialise.Gen_Hidden_Weights(n_neurons, true);
+        // output_weights = Initialise.Gen_Output_Weights(n_neurons);
+        // Graph.run();
 
         System.out.println("Hello World");
         
@@ -28,25 +33,21 @@ public class Neural_Network
             errors = new double[inputs.length];
             for(int j = 0; j < inputs.length; j++)
             {
-                for(int k = 0; k < hidden_layers; k++)
-                {    
-                    clockwise_iterator.Start(inputs[j], hidden_weights, output_weights);
-                    forward_training_set[j][k] = clockwise_iterator;
-                }
+                clockwise_iterator.Multi_Hidden(inputs[j], hidden_layers);
+                clockwise_iterator.Start_Output(inputs[j], output_weights);
+                forward_training_set[j] = clockwise_iterator;
 
-                for(int k = 0; k < hidden_layers; k++)
-                {
-                    anticlockwise_iterator.Start(outputs[j], forward_training_set[j][k].final_output, learning_rate, inputs[j], forward_training_set[j][k].hidden_output);
-                    backward_training_set[j][k] = anticlockwise_iterator;
-                }                    
+            
+                anticlockwise_iterator.Start(outputs[j], learning_rate, inputs[j], forward_training_set[j]);
+                backward_training_set[j] = anticlockwise_iterator;
 
-                errors[j] = backward_training_set[j][hidden_layers-1].error;
+                errors[j] = backward_training_set[j].error;
+
             }
             
-            if(iteration%10 == 0)
-                System.out.println(Analysis.MSE(errors));
+            System.out.println(Analysis.MSE(errors));
             iteration++;
         }
       
-    }    
+    }     
 }

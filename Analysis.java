@@ -1,6 +1,6 @@
 public class Analysis 
 {
-    // static boolean walk_through = false; 
+    static boolean walk_through = false; 
 
     public static void Print_Matrix_1D(double[] matrix)
     {
