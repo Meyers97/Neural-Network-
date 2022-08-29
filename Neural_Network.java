@@ -6,7 +6,7 @@ public class Neural_Network
     static double[] output_weights = {0.35,0.81,0.9};
     static double[] errors;
     static double learning_rate = 0.25;
-    static int max_iteration = 10000;
+    static int max_iteration = 100;
     static int iteration = 0;
     static int hidden_layers = 3;
     static int n_neurons = 5;
@@ -19,8 +19,8 @@ public class Neural_Network
         inputs = Initialise.Gen_Inputs(2);
         outputs = Initialise.Gen_Outputs(inputs, 4);
         for(int j = 0; j < hidden_layers; j++)
-            hidden_weights[j] = Initialise.Gen_Hidden_Weights(n_neurons, true);
-        // output_weights = Initialise.Gen_Output_Weights(n_neurons);
+            hidden_weights[j] = Initialise.Gen_Hidden_Weights(n_neurons, false);
+        output_weights = Initialise.Gen_Output_Weights(n_neurons);
         // Graph.run();
 
         System.out.println("Hello World");
@@ -42,6 +42,7 @@ public class Neural_Network
                 backward_training_set[j] = anticlockwise_iterator;
 
                 errors[j] = backward_training_set[j].error;
+                
 
             }
             

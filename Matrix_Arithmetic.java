@@ -43,7 +43,7 @@ public class Matrix_Arithmetic
             //     Analysis.Print_Matrix_1D(input);
             //     Analysis.Print_Matrix_1D(weight);
             //     System.out.println();
-            // }
+            // } 
         }
 
         return result;
@@ -51,23 +51,22 @@ public class Matrix_Arithmetic
 
     public static double[] Matrix_Dot_2D(double[] input, double[][] weights)
     {
-        double[] result = new double[weights[0].length];
+        double[] result = new double[weights.length];
         
-        for(int j = 0; j < weights[0].length; j++)
+        for(int j = 0; j < weights.length; j++)
         {
             for(int k = 0; k < input.length; k++)
             {
-                result[j] += weights[k][j]*input[k]; 
+                result[j] += weights[j][k]*input[k]; 
             }
         }
         // if(Analysis.walk_through == true)
-        //         {
-        //             // System.out.print("Matrix Dot 2D: ");
-        //             // Analysis.Print_Matrix_1D(result);
-        //             // Analysis.Print_Matrix_1D(input);
-        //             // Analysis.Print_Matrix_2D(weights);
-        //             System.out.println(Analysis.walk_through);
-        //         }
+                // {
+                //     System.out.print("Matrix Dot 2D: ");
+                //     Analysis.Print_Matrix_1D(result);
+                //     Analysis.Print_Matrix_1D(input);
+                //     Analysis.Print_Matrix_2D(weights);
+                // }
 
         return result;
     }
@@ -108,7 +107,7 @@ public class Matrix_Arithmetic
         {
             for(int k = 0; k < input_1[0].length; k++)
             {
-                result[j][k] = input_1[j][k] +input_2[k][j];
+                result[j][k] = input_1[j][k] +input_2[j][k];
             }
         }
         return result;
@@ -118,13 +117,13 @@ public class Matrix_Arithmetic
     {
         double[][] result = new double[hidden_weights.length][hidden_weights[0].length];
 
-        for(int j = 0; j < hidden_weights[0].length; j++)
+        for(int j = 0; j < hidden_weights.length; j++)
         {
             for(int k = 0; k < hidden_input.length; k++)
             {
                 result[j][k] = learning_rate*error*hidden_input[k]*hidden_output[j]*(1-hidden_output[j]);
                 // if(Analysis.walk_through == true)
-                //     System.out.println(result[j][k] + " = "+learning_rate + "*" + error + "*" + hidden_input[j] + "*" + hidden_output[k] + "*" + "(1-" + hidden_output[k] + ")");
+                    // System.out.println(result[j][k] + " = "+learning_rate + "*" + error + "*" + hidden_input[k] + "*" + hidden_output[j] + "*" + "(1-" + hidden_output[j] + ")");
             }
         }
         return result;
@@ -138,7 +137,7 @@ public class Matrix_Arithmetic
         {
             result[j] = learning_rate*error*hidden_output[j]*output*(1-output);
             // if(Analysis.walk_through == true)
-            //         System.out.println(result[j] + " = "+learning_rate + "*" + error + "*" + hidden_output[j] + "*" + output + "*" + "(1-" + output + ")");
+                    // System.out.println(result[j] + " = "+learning_rate + "*" + error + "*" + hidden_output[j] + "*" + output + "*" + "(1-" + output + ")");
         }
 
         return result;
